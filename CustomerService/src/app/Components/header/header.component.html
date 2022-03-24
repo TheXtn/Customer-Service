@@ -1,8 +1,12 @@
-
+<div>
 <div class="navbar">
     <button mat-button>Home</button>
     <button mat-button>Login</button>
-    <button mat-button>About</button>
-    
-    
+    <button mat-button>About</button> 
     </div>
+   <div *ngFor="let hero of heros">
+        <p>{{hero.id}}  {{hero.name}}</p>
+
+   </div>
+
+</div>

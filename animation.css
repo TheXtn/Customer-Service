@@ -1,0 +1,18 @@
+/*
+The CSS export should solely be used as a reference.
+For a more detailed animation export the JSON file should be used.
+*/
+#Sign_in {
+    transform: translateX(-50%) translateY(-50%);
+    animation: Sign_in__rotation__1 200ms 0ms ease-in forwards;
+}
+
+@keyframes Sign_in__rotation__1 {
+    from {
+        transform: translateX(-50%) translateY(-50%) rotate(-44.7644deg);
+    }
+
+    to {
+        transform: translateX(-50%) translateY(-50%) rotate(0.1752deg);
+    }
+}
