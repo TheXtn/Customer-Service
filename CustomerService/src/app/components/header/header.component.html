@@ -6,15 +6,15 @@
     <div style=" overflow: auto; padding: 0.5rem;margin-left: 5%;">
 
         <div class="navbtn">
-               <app-matbutton text="Discover" color="primary" (click)="discover()"></app-matbutton>
+               <app-matbutton text="Discover" color="primary" ></app-matbutton>
         </div>
 
         <div class="navbtn" style="margin-left: 10vh;">
-            <app-matbutton text="F&Q" color="primary" (click)="FQ()"></app-matbutton>
+            <app-matbutton text="F&Q" color="primary"></app-matbutton>
         </div>
 
         <div class="navbtn" style="position: absolute; right: 1.5rem;">
-            <app-matbutton text="Login" color="primary" (click)="signin()"></app-matbutton>
+            <a routerLink="/login"><app-matbutton text="Login" color="primary" ></app-matbutton></a>
         </div>
 
     </div>
