@@ -15,8 +15,6 @@ body {
   background-size: cover;
   background-position: fixed;
   background-repeat: no-repeat;
-  
-
 }
 .navbtn {
   border-bottom: 1px solid steelblue;
@@ -37,14 +35,15 @@ body {
   border: 1px solid steelblue;
   padding: 30px;
   border-radius: 15px;
-  width: 40rem;
+  width: 32vw;
+  min-width: 32vw;
   backdrop-filter: blur(10px);
 }
 
 .leftF {
   position: absolute;
-  right: 25rem;
-  top: 15rem;
+  right: 22%;
+  top: 22%;
 }
 
 .containerINDERLINE {
