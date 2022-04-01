@@ -8,15 +8,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatButtonModule} from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { MatbuttonComponent } from './components/matbutton/matbutton.component';
 import { HomeComponent } from './components/home/home.component';
 import { SigninComponent } from './components/signin/signin.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatIconModule} from '@angular/material/icon';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 
 const appRoutes: Routes=[
   {path:'',component: HomeComponent,},
-  {path:'login',component: SigninComponent,}
+  {path:'login',component: SigninComponent,},
+  {path: 'user/:id',children:[
+    {path:'dashboard', component: UserDashboardComponent,},
+  ]},
 ]
 
 @NgModule({
@@ -26,6 +35,7 @@ const appRoutes: Routes=[
     MatbuttonComponent,
     HomeComponent,
     SigninComponent,
+    UserDashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +45,11 @@ const appRoutes: Routes=[
     MatButtonModule,
     MatGridListModule,
     FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    MatIconModule,
     RouterModule.forRoot(appRoutes, {enableTracing: true}),
   ],
   providers: [],
