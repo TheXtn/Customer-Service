@@ -1,8 +1,29 @@
-<mat-grid-list cols="2">
-    <mat-grid-tile></mat-grid-tile>
-    <mat-grid-tile>
+<div class="leftF">
+    <div class="containerBOX">
+        <div style="text-align: center;">
+        <h1 style="font-size: 5rem;text-align: center;">Sign in</h1>
+        <br>
+        <br>
+         <mat-form-field appearance="outline" hideRequiredMarker style="width:400px !important;">
+            <mat-label>Username / Email</mat-label>
+            <input matInput required id='login'>
+        </mat-form-field>
+        <br>
+        <br>
+        <mat-form-field appearance="outline" style="width:400px !important;">
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" id="pass">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        <br><div>
+        <p><mat-checkbox color="primary" >Remember Me</mat-checkbox>                              Forgot password?</p>
+        <br>
+        <br>
         
-        
-
-    </mat-grid-tile>
-</mat-grid-list>
+        <button mat-raised-button color="primary" style="width: 400px; height: 3.5rem;" (click)="login()"><p style="font-size: 1.2rem;">Sign in</p></button>
+        <p>Don't have an account? Join us instead...</p>
+    </div>
+</div>
+</div>
