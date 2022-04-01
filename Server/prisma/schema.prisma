@@ -1,0 +1,45 @@
+// prisma/schema.prisma
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["mongoDb"]
+}
+
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+model Technician{
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  email  String @unique
+  password  String
+  cat Categorie? @relation(fields: [catID],references: [id])
+  catID String @db.ObjectId
+
+}
+model Categorie{
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  technicians Technician[]
+  tickets Ticket[]
+}
+model User{
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  email  String @unique
+  password  String
+  tickets Ticket[]
+}
+model Ticket{
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  desc String
+  author User? @relation(fields: [authorID],references: [id])
+  authorID String    @db.ObjectId
+  cat Categorie? @relation(fields: [catID],references: [id])
+  catID String @db.ObjectId
+}

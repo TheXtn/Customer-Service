@@ -1,0 +1,42 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Technician {
+  id String [pk]
+  name String [not null]
+  email String [unique, not null]
+  password String [not null]
+  cat Categorie
+  catID String [not null]
+}
+
+Table Categorie {
+  id String [pk]
+  name String [not null]
+  technicians Technician [not null]
+  tickets Ticket [not null]
+}
+
+Table User {
+  id String [pk]
+  name String [not null]
+  email String [unique, not null]
+  password String [not null]
+  tickets Ticket [not null]
+}
+
+Table Ticket {
+  id String [pk]
+  desc String [not null]
+  author User
+  authorID String [not null]
+  cat Categorie
+  catID String [not null]
+}
+
+Ref: Technician.catID > Categorie.id
+
+Ref: Ticket.authorID > User.id
+
+Ref: Ticket.catID > Categorie.id
