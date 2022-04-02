@@ -53,7 +53,22 @@ export class LibService {
     })
     const data1=await res1.json();
   }
-  
+  async RegisterUser(name:string,email:string,password:string){
+    const config={
+      headers:{
+        'Content-Type':'application/json'
+      },
+      method:"Post",
+      body:JSON.stringify({
+        "email": email,
+        "name": name,
+        "password": password
+      })
+    }
+    const res=await fetch("http://localhost:3000/api/createUser",config)
+    const data=res.json()
+    return data
+  }
   
  
 }
