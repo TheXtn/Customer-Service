@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { MatbuttonComponent } from './components/matbutton/matbutton.component';
@@ -20,9 +21,11 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SignupComponent } from './components/signup/signup.component';
 const appRoutes: Routes=[
   {path:'',component: HomeComponent,},
   {path:'login',component: SigninComponent,},
+  {path:'signup',component:SignupComponent},
   {path: 'user',children:[
     {path:'dashboard', component: UserDashboardComponent,},
   ]},
@@ -36,6 +39,7 @@ const appRoutes: Routes=[
     HomeComponent,
     SigninComponent,
     UserDashboardComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +55,7 @@ const appRoutes: Routes=[
     ReactiveFormsModule,
     MatIconModule,
     HttpClientModule,
+    MatSelectModule,
     RouterModule.forRoot(appRoutes, {enableTracing: true}),
   ],
   providers: [HeaderComponent],

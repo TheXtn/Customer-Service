@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LibService } from './../../services/lib/lib.service';
-import {Router} from '@angular/router';
+import {Data, Router} from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-header',
@@ -10,11 +11,12 @@ import {Router} from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   logtxt : string ='';
-  constructor(private libService:LibService,private route:Router) { }
+  constructor(private libService:LibService,private route:Router,private data:DataService) { }
 
   async ngOnInit(): Promise<void> {
+    this.data.currentMessage.subscribe(message => this.logtxt = message);
     const isloggedin = await this.libService.isLoggedin()
-    if (isloggedin){this.logtxt="Logout"}else{this.logtxt="Login"}
+    if (isloggedin){this.data.changeLogtxt('Logout')}else{this.data.changeLogtxt('Login')}
   }
 
   async redirect() {
@@ -25,7 +27,7 @@ export class HeaderComponent implements OnInit {
       
       const out= await this.libService.SignOut(csrf)
       this.route.navigate(['/'])
-      this.logtxt="Login"
+      this.data.changeLogtxt('Login')
      
     }
   }

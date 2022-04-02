@@ -5,8 +5,9 @@
         <br>
         <br>
          <mat-form-field appearance="outline" hideRequiredMarker style="width:21.5vw !important;">
-            <mat-label>Username / Email</mat-label>
-            <input matInput required id='login'>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="pat@example.com" [formControl]="email" required id='login'>
+            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <br>
         <br>
@@ -23,7 +24,7 @@
         <br>
         
         <button mat-raised-button color="primary" style="width:21.5vw; height: 3.5rem;" (click)="login()"><p style="font-size: 1.2rem;">Sign in</p></button>
-        <p>Don't have an account? Join us instead...</p>
+        <a routerLink="/signup"><p>Don't have an account? Join us instead...</p></a>
     </div>
 </div>
 </div>

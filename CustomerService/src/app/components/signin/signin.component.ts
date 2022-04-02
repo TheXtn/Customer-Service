@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { LibService } from './../../services/lib/lib.service';
 import {Router} from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
+import { DataService } from 'src/app/services/data.service';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-signin',
@@ -10,13 +12,23 @@ import { HeaderComponent } from '../header/header.component';
 })
 export class SigninComponent implements OnInit {
   hide :boolean =true;
-  
-  constructor(private libService:LibService,private route:Router,private head:HeaderComponent) { 
+  logtxt : string="";
+  constructor(private data:DataService,private libService:LibService,private route:Router,private head:HeaderComponent) { 
 
+  }
+  email = new FormControl('', [Validators.required, Validators.email]);
+
+  getErrorMessage() {
+    if (this.email.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.email.hasError('email') ? 'Not a valid email' : '';
   }
   
   async ngOnInit(): Promise<void> {
     document.body.className = "selector";
+    this.data.currentMessage.subscribe(message => this.logtxt = message);
     const isloggedin = await this.libService.isLoggedin()
     if (isloggedin){
       this.route.navigate(['/user/dashboard'])
@@ -42,7 +54,7 @@ export class SigninComponent implements OnInit {
         if (log==404){
           alert("Email or password incorrect!")
         }else{
-          this.head.logtxt="Logout"
+          this.data.changeLogtxt('Logout')
           this.route.navigate(['/user/dashboard'])
         }
         
