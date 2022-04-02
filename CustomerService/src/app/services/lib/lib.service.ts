@@ -41,7 +41,7 @@ export class LibService {
 
   }
   async SignOut(csrf:string){
-    const res1=await fetch('http://localhost:3000/api/User/auth/callback/credentials',{
+    const res1=await fetch('http://localhost:3000/api/User/auth/signout',{
       credentials: 'include',
       headers:{
         'Content-Type':'application/json'
