@@ -26,7 +26,7 @@ export class SigninComponent implements OnInit {
       pass : (<HTMLInputElement>document.getElementById('pass')).value,
     });
     console.log(credentials);
-    const res=await fetch('http://localhost:3000/api/User/auth/session')
+    const res=await fetch('http://localhost:3000/api/User/auth/session' ,)
     const data=await res.json();
     console.log(data);
   }
