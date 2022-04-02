@@ -36,7 +36,7 @@ export class LibService {
             password: password
       })
     })
-    const data1=await res1.json();
+    return res1.status
     
 
   }
