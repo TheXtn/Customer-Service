@@ -19,7 +19,7 @@ export class SigninComponent implements OnInit {
     document.body.className = "selector";
     const isloggedin = await this.libService.isLoggedin()
     if (isloggedin){
-      this.route.navigate(['/user/:id/dashboard'])
+      this.route.navigate(['/user/dashboard'])
     }
   }
 
