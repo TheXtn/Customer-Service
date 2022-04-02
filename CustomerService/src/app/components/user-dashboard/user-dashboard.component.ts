@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LibService } from 'src/app/services/lib/lib.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-dashboard.component.css']
 })
 export class UserDashboardComponent implements OnInit {
+  User : String="";
+  constructor(private libService:LibService) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    const data=await this.libService.getCurrentUser()
+    this.User=data.user.name
   }
 
 }
