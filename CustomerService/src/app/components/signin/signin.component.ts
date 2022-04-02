@@ -14,10 +14,10 @@ export class SigninComponent implements OnInit {
 
   }
   
-
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     document.body.className = "selector";
-    if (this.libService.isLoggedin()){
+    const isloggedin = await this.libService.isLoggedin()
+    if (isloggedin){
       this.route.navigate(['/user/:id/dashboard'])
     }
   }
@@ -34,8 +34,8 @@ export class SigninComponent implements OnInit {
 
 
     let csrf=await this.libService.getCsrf()
-
-    if (this.libService.isLoggedin()){
+    const isloggedin = await this.libService.isLoggedin()
+    if (isloggedin == false){
         console.log("there is no user logged in")
         const log=await this.libService.logUser(login,pass,csrf)
         console.log(log)

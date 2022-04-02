@@ -11,7 +11,8 @@ export class HeaderComponent implements OnInit {
   logtxt : string ='';
   constructor(private libService:LibService) { }
 
-  ngOnInit(): void {
-    if (this.libService.isLoggedin()){this.logtxt="Logout"}else{this.logtxt="Login"}
+  async ngOnInit(): Promise<void> {
+    const isloggedin = await this.libService.isLoggedin()
+    if (isloggedin){this.logtxt="Logout"}else{this.logtxt="Login"}
   }
 }
