@@ -39,6 +39,7 @@ export class SigninComponent implements OnInit {
         console.log("there is no user logged in")
         const log=await this.libService.logUser(login,pass,csrf)
         this.route.navigate(['/user/:id/dashboard'])
+        
     }else{
       let User=await this.libService.getCurrentUser()
         console.log(User)

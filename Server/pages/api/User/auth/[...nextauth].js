@@ -41,6 +41,9 @@ export default NextAuth({
       session.user["role"]="User"
       return session
     },
+    redirect({ url, baseUrl }) {
+      return "http://localhost:3000/api/hello"
+    }
 
   },
 });
