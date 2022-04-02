@@ -12,7 +12,7 @@ export default NextAuth({
       async authorize(credentials, req) {
         const res=await LoginUser(credentials)
         if (res.message){
-          return null
+          throw new Error(res.message)
         }
         return res
       }

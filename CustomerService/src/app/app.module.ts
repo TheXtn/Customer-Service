@@ -19,7 +19,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
-
+import { HttpClientModule } from '@angular/common/http';
 const appRoutes: Routes=[
   {path:'',component: HomeComponent,},
   {path:'login',component: SigninComponent,},
@@ -50,6 +50,7 @@ const appRoutes: Routes=[
     MatCheckboxModule,
     ReactiveFormsModule,
     MatIconModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes, {enableTracing: true}),
   ],
   providers: [],

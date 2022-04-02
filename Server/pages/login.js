@@ -8,6 +8,10 @@ export default function Log(props){
         const csrf=await getcsrf.json()
         return csrf.csrfToken
     }
+    async function hclick(){
+        const cs=await getcsrfdata()
+        console.log(cs)
+    }
 
     async function handlelogin(){
         const csrf=await getcsrfdata()
@@ -50,13 +54,19 @@ export default function Log(props){
     const session=props.session
     if (Object.entries(session).length === 0){
         return(
-            <button onClick={handlelogin}>LogIn</button>
+            <div>
+                <button onClick={hclick}>csrf</button>
+                <button onClick={handlelogin}>LogIn</button>
+            </div>
+   
+            
         )
         
     }
     else{
         return (
             <div>
+                
             <h1>Welcome {session.user.name}</h1>
             <button onClick={handlelogout}>LogOut</button>
              
