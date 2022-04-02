@@ -23,7 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 const appRoutes: Routes=[
   {path:'',component: HomeComponent,},
   {path:'login',component: SigninComponent,},
-  {path: 'user/:id',children:[
+  {path: 'user',children:[
     {path:'dashboard', component: UserDashboardComponent,},
   ]},
 ]
@@ -53,7 +53,7 @@ const appRoutes: Routes=[
     HttpClientModule,
     RouterModule.forRoot(appRoutes, {enableTracing: true}),
   ],
-  providers: [],
+  providers: [HeaderComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

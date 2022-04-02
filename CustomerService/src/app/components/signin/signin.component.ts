@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LibService } from './../../services/lib/lib.service';
 import {Router} from '@angular/router';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-signin',
@@ -10,7 +11,7 @@ import {Router} from '@angular/router';
 export class SigninComponent implements OnInit {
   hide :boolean =true;
   
-  constructor(private libService:LibService,private route:Router) { 
+  constructor(private libService:LibService,private route:Router,private head:HeaderComponent) { 
 
   }
   
@@ -38,7 +39,8 @@ export class SigninComponent implements OnInit {
     if (isloggedin == false){
         console.log("there is no user logged in")
         const log=await this.libService.logUser(login,pass,csrf)
-        this.route.navigate(['/user/:id/dashboard'])
+        this.head.logtxt="Logout"
+        this.route.navigate(['/user/dashboard'])
         
     }else{
       let User=await this.libService.getCurrentUser()
