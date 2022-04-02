@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import { LibService } from 'src/app/services/lib/lib.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +13,11 @@ export class SignupComponent implements OnInit {
   hide2 :boolean =true;
   pass2Color :string="primary";
   passErrorMessage :string='';
-  constructor() { }
+
+
+  constructor(private libService:LibService,private route:Router) { }
+
+
   Fname = new FormControl('',Validators.required);
   Lname = new FormControl('',Validators.required);
   pass1 = new FormControl('',Validators.required);
@@ -45,8 +51,22 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    document.body.className="selector";
+  async ngOnInit(): Promise<void> {
+    document.body.className = "selector";
+    const isloggedin = await this.libService.isLoggedin()
+    if (isloggedin){
+      this.route.navigate(['/user/dashboard'])
+    }
+  }
+
+  async Register() {
+    let name = (<HTMLInputElement>document.getElementById('firstN')).value;
+    let email = (<HTMLInputElement>document.getElementById('login')).value;
+    let pass = (<HTMLInputElement>document.getElementById('pass1')).value;
+
+    const reg = await this.libService.RegisterUser(name,email,pass);
+    console.log(reg);
+    this.route.navigate(['/login'])
   }
 
 }

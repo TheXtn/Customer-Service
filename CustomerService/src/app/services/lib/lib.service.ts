@@ -65,7 +65,7 @@ export class LibService {
         "password": password
       })
     }
-    const res=await fetch("http://localhost:3000/api/createUser",config)
+    const res=await fetch("http://localhost:3000/api/User/createUser",config)
     const data=res.json()
     return data
   }
