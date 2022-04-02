@@ -40,6 +40,19 @@ export class LibService {
     
 
   }
+  async SignOut(csrf:string){
+    const res1=await fetch('http://localhost:3000/api/User/auth/callback/credentials',{
+      credentials: 'include',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      method:"Post",
+      body:JSON.stringify({
+            csrfToken:csrf
+      })
+    })
+    const data1=await res1.json();
+  }
   
   
  
