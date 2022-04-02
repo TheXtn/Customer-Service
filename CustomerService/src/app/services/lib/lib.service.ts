@@ -17,6 +17,10 @@ export class LibService {
     const data=await res.json();
     return data
   }
+  isLoggedin() {
+    let user = this.getCurrentUser();
+    if (Object.keys(user).length === 0) {return false}else{return true}
+  }
   async logUser(email:string,password:string,cs:string){
     const res1=await fetch('http://localhost:3000/api/User/auth/callback/credentials',{
       credentials: 'include',

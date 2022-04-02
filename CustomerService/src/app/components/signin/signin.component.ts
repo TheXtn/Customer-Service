@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LibService } from 'src/app/lib.service';
+import { LibService } from './../../services/lib/lib.service';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -29,16 +29,16 @@ export class SigninComponent implements OnInit {
 
 
     let csrf=await this.libService.getCsrf()
-    console.log(csrf)
-    let User=await this.libService.getCurrentUser()
-    let NoUser=Object.keys(User).length === 0
-    if (NoUser){
+
+    if (this.libService.isLoggedin()){
         console.log("there is no user logged in")
+        const log=await this.libService.logUser(login,pass,csrf)
+        console.log(log)
     }else{
+      let User=await this.libService.getCurrentUser()
         console.log(User)
     }
-    const log=await this.libService.logUser(login,pass,csrf)
-    console.log(log)
+    
   
 
 }
