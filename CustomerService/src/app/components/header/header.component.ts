@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
       let csrf=await this.libService.getCsrf()
       const out= await this.libService.SignOut(csrf)
       this.route.navigate(['/'])
+      this.logtxt="Login"
     }
   }
 }

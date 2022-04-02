@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LibService } from 'src/app/services/lib/lib.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route:Router,private libService:LibService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    const isloggedin = await this.libService.isLoggedin()
+    if (isloggedin == false){
+      this.route.navigate(['/login'])
+    }
   }
 
 }
