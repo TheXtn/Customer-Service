@@ -18,8 +18,8 @@ export class LibService {
     return data
   }
   
-  isLoggedin() {
-    let user = this.getCurrentUser();
+  async isLoggedin() {
+    let user =await  this.getCurrentUser();
     if (Object.keys(user).length === 0) {return false}else{return true}
   }
 
