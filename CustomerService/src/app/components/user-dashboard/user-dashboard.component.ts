@@ -7,11 +7,12 @@ import { LibService } from 'src/app/services/lib/lib.service';
   styleUrls: ['./user-dashboard.component.css']
 })
 export class UserDashboardComponent implements OnInit {
-  User : Object={};
+  User : string="";
   constructor(private libService:LibService) { }
 
   async ngOnInit(): Promise<void> {
-    const data=await this.libService.getCurrentUser
+    const data=await this.libService.getCurrentUser()
+    this.User=data.user.name
   }
 
 }
