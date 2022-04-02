@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LibService } from './../../services/lib/lib.service';
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -8,13 +10,16 @@ import { LibService } from './../../services/lib/lib.service';
 export class SigninComponent implements OnInit {
   hide :boolean =true;
   
-  constructor(private libService:LibService) { 
+  constructor(private libService:LibService,private route:Router) { 
 
   }
   
 
   ngOnInit(): void {
     document.body.className = "selector";
+    if (this.libService.isLoggedin()){
+      this.route.navigate(['/user/:id/dashboard'])
+    }
   }
 
   ngOnDestroy(){

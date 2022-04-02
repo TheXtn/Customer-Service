@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LibService } from './../../services/lib/lib.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  logtxt : string ='';
+  constructor(private libService:LibService) { }
 
   ngOnInit(): void {
+    if (this.libService.isLoggedin()){this.logtxt="Logout"}else{this.logtxt="Login"}
   }
-
 }
