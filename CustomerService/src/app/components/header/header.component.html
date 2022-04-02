@@ -14,7 +14,7 @@
         </div>
 
         <div class="navbtn" style="position: absolute; right: 1.5rem;">
-            <a routerLink="/login"><app-matbutton text={{logtxt}} color="primary" ></app-matbutton></a>
+            <app-matbutton text={{logtxt}} color="primary" (click)="redirect()"></app-matbutton>
         </div>
 
     </div>
