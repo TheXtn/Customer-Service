@@ -49,19 +49,20 @@ export class SigninComponent implements OnInit {
   async login() {
   
       let login = (<HTMLInputElement>document.getElementById('login')).value
-      let pass = (<HTMLInputElement>document.getElementById('pass')).value
+      let pass = (<HTMLInputElement>document.getElementById('pass1')).value
 
 
     let csrf=await this.libService.getCsrf()
     const isloggedin = await this.libService.isLoggedin()
+
     if (isloggedin == false){
-        console.log("there is no user logged in")
 
         let ok = true;
         if ((this.email.hasError('email')) || (login=='')){ok = false;alert('Invalid E-mail!')}
         else if (pass ==''){ok = false;alert('Password is required')}
         
         if (ok==true){
+
             if (this.Role =="Customer") {
             const log=await this.libService.logUser(login,pass,csrf)
             if (log==404){
