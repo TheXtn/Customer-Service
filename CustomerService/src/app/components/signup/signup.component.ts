@@ -34,11 +34,8 @@ export class SignupComponent implements OnInit {
   getErrorMessageFName() {
     return this.Fname.hasError('required') ? 'You must enter a first name!' : '';
   }
-  getErrorMessageLName() {
-    return this.Lname.hasError('required') ? 'You must enter a Last name!' : '';
-  }
   getErrorMessagePass1() {
-    return this.Lname.hasError('required') ? 'You must enter a password!' : '';
+    return this.pass1.hasError('required') ? 'You must enter a password!' : '';
   }
 
 
@@ -61,12 +58,24 @@ export class SignupComponent implements OnInit {
 
   async Register() {
     let name = (<HTMLInputElement>document.getElementById('firstN')).value;
+    let LastName = (<HTMLInputElement>document.getElementById('lastN')).value;
     let email = (<HTMLInputElement>document.getElementById('login')).value;
-    let pass = (<HTMLInputElement>document.getElementById('pass1')).value;
+    let pass1 = (<HTMLInputElement>document.getElementById('pass1')).value;
+    let pass2 = (<HTMLInputElement>document.getElementById('pass2')).value;
 
-    const reg = await this.libService.RegisterUser(name,email,pass);
-    console.log(reg);
-    this.route.navigate(['/login'])
+    let ok = true;
+    if (name == ''){ok = false;alert('Name is required')}
+    else if ((this.email.hasError('email')) || (email=='')){ok = false;alert('Invalid E-mail!')}
+    else if (pass1 ==''){ok = false;alert('Password is required')}
+    else if (pass1 != pass2){ok=false;alert('Passwords not matching!')}
+    if(LastName != ''){ name = name+LastName}
+    console.log(name);
+
+    if(ok == true){
+      const reg = await this.libService.RegisterUser(name,email,pass1);
+      this.route.navigate(['/login'])
+    }
+    
   }
 
 }

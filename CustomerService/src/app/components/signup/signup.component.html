@@ -10,16 +10,17 @@
             <mat-error *ngIf="email.invalid">{{getErrorMessageFName()}}</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" style="width:10.75vw !important;margin-left: 0.75vw;">
-            <mat-label>Last Name</mat-label>
-            <input matInput [type]="hide1 ? 'password' : 'text'" id="lastN" [formControl]="Lname">
-            <mat-error *ngIf="email.invalid">{{getErrorMessageLName()}}</mat-error>
+            <mat-label>Last Name (optional)</mat-label>
+            <input matInput id='lastN'>
+            
           </mat-form-field>
         <br>
-         <mat-form-field appearance="outline" hideRequiredMarker style="width:10.75vw !important;">
+         <mat-form-field appearance="outline" hideRequiredMarker style="width:21.5vw !important;">
             <mat-label>Email</mat-label>
             <input matInput placeholder="pat@example.com" [formControl]="email" required id='login'>
             <mat-error *ngIf="email.invalid">{{getErrorMessageMail()}}</mat-error>
         </mat-form-field>
+        <br>
         <mat-form-field appearance="outline" style="width:10.75vw !important;margin-left: 0.75vw;">
             <mat-label>Enter your password</mat-label>
             <input matInput [type]="hide1 ? 'password' : 'text'" id="pass1" [formControl]="pass1">
@@ -27,14 +28,6 @@
               <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
             <mat-error *ngIf="email.invalid">{{getErrorMessagePass1()}}</mat-error>
-          </mat-form-field>
-        <br>
-        <mat-form-field appearance="fill">
-            <mat-label>Select</mat-label>
-            <mat-select>
-              <mat-option value="one">First option</mat-option>
-              <mat-option value="two">Second option</mat-option>
-            </mat-select>
           </mat-form-field>
           <mat-form-field color={{pass2Color}} appearance="outline" style="width:10.75vw !important;margin-left: 0.75vw;">
             <mat-label>Confirm your password</mat-label>

@@ -11,16 +11,24 @@
         </mat-form-field>
         <br>
         <br>
-        <mat-form-field appearance="outline" style="width:21.5vw !important;">
-            <mat-label>Enter your password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" id="pass">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-          </mat-form-field>
+        <mat-form-field appearance="outline" hideRequiredMarker style="width:21.5vw !important;">
+          <mat-label>Enter your password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" id="pass1" [formControl]="pass1">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="email.invalid">{{getErrorMessagePass1()}}</mat-error>
+        </mat-form-field>
+        
         <br><div>
-        <p><mat-checkbox color="primary" >Remember Me</mat-checkbox>                              Forgot password?</p>
-        <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Login as</mat-label>
+            <mat-select [(value)]="Role">
+              <mat-option value="Customer">Customer</mat-option>
+              <mat-option value="Technicien">Technicien</mat-option>
+            </mat-select>
+          </mat-form-field>                
+          <mat-checkbox color="primary" >Remember Me</mat-checkbox> <p> Forgot password?</p>
         <br>
         
         <button mat-raised-button color="primary" style="width:21.5vw; height: 3.5rem;" (click)="login()"><p style="font-size: 1.2rem;">Sign in</p></button>

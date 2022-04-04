@@ -40,6 +40,23 @@ export class LibService {
     
 
   }
+
+  async logTech(email:string,password:string,cs:string){
+    const res1=await fetch('http://localhost:3000/api/Technician/auth/callback/credentials',{
+      credentials: 'include',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      method:"Post",
+      body:JSON.stringify({
+            csrfToken:cs,
+            email: email,
+            password: password
+      })
+    })
+    return res1.status
+  }
+
   async SignOut(csrf:string){
     const res1=await fetch('http://localhost:3000/api/User/auth/signout',{
       credentials: 'include',
