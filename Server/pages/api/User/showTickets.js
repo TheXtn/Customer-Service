@@ -1,4 +1,4 @@
-import { CreateTicket, ShowAllUserTickets } from "../../prisma/Ticket"
+import { CreateTicket, ShowAllUserTickets } from "../../../prisma/Ticket"
 import { getSession } from "next-auth/react"
 export default async function handler(req, res) {
     if (req.method!="GET"){

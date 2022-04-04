@@ -35,11 +35,16 @@ model User{
   password  String
   tickets Ticket[]
 }
+type Disscusion{
+  authorEmail String
+  content String
+}
 model Ticket{
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  desc String
   author User? @relation(fields: [authorID],references: [id])
   authorID String    @db.ObjectId
   cat Categorie? @relation(fields: [catID],references: [id])
   catID String @db.ObjectId
+  disscusions Disscusion[]
+  closed Boolean
 }

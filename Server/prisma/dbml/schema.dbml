@@ -27,12 +27,13 @@ Table User {
 }
 
 Table Ticket {
+  disscusions Disscusion [not null]
   id String [pk]
-  desc String [not null]
   author User
   authorID String [not null]
   cat Categorie
   catID String [not null]
+  closed Boolean [not null]
 }
 
 Ref: Technician.catID > Categorie.id
