@@ -22,6 +22,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './components/signup/signup.component';
+import { SidebarModule } from 'ng-sidebar';
+
 const appRoutes: Routes=[
   {path:'',component: HomeComponent,},
   {path:'login',component: SigninComponent,},
@@ -56,6 +58,7 @@ const appRoutes: Routes=[
     MatIconModule,
     HttpClientModule,
     MatSelectModule,
+    SidebarModule.forRoot(),
     RouterModule.forRoot(appRoutes, {enableTracing: true}),
   ],
   providers: [HeaderComponent],
