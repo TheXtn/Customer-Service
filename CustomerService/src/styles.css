@@ -47,6 +47,22 @@ body {
   backdrop-filter: blur(10px);
 }
 
+colortest {
+  color: rgba(9, 133, 5, 0.8);
+  color: rgba(255, 0, 0, 0.8);
+}
+
+.containerBOX2 {
+  overflow: auto;
+  background-color: rgba(255, 255, 255, 0.664);
+  padding: 30px;
+  border-radius: 15px;
+  width: 100%;
+  min-width: 32vw;
+  backdrop-filter: blur(10px);
+  box-shadow: 0px 0px 1vw rgba(85, 85, 85, 0.5);
+}
+
 .leftF {
   position: absolute;
   right: 22%;

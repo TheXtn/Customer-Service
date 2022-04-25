@@ -3,16 +3,19 @@ import { Router } from '@angular/router';
 import { LibService } from 'src/app/services/lib/lib.service';
 
 @Component({
-  selector: 'app-tickets',
-  templateUrl: './tickets.component.html',
-  styleUrls: ['./tickets.component.css']
+  selector: 'app-crt-ticket',
+  templateUrl: './crt-ticket.component.html',
+  styleUrls: ['./crt-ticket.component.css']
 })
-export class TicketsComponent implements OnInit {
-  user :string="Default";
-  role :String="Client";
-  opened:boolean = true
-  icon:string ="keyboard_backspace"
-  tickets:any;
+export class CrtTicketComponent implements OnInit {
+
+  opened:boolean=true
+  icon:string="keyboard_backspace"
+
+  user: string="Default"
+  role:String="Client"
+
+  Cat:string=''
 
   constructor(private route:Router,private libService:LibService) { }
 
@@ -25,15 +28,9 @@ export class TicketsComponent implements OnInit {
     this.user=data.user.name
     if (data.user.role == "User") {this.role = "Client"}
     }
-    const resp=await this.libService.getTickets()
-    console.log(resp)
-    resp.subscribe((data:any)=>this.tickets)
+    const tickets=await this.libService.getTickets()
+    console.log(tickets)
   }
-
-
-
-
-
 
   toggleSide(){
     this.opened = !this.opened
@@ -43,6 +40,17 @@ export class TicketsComponent implements OnInit {
       this.icon = "clear_all"
     }
   }
+
+  async submit(){
+    if (this.Cat == ""){
+      alert("Please choose a category.")
+    }else{
+      let desc = (<HTMLInputElement>document.getElementById('Desc')).value;
+      const reg = await this.libService.CreateTicket(this.Cat,desc);
+      this.route.navigate(['/user/tickets'])
+    }
+  }
+
   redirectACC() {
     this.route.navigate(["/user/profile"])
   }
@@ -55,8 +63,7 @@ export class TicketsComponent implements OnInit {
   }
 
   redirectCT() {
-    this.route.navigate(["/user/create-ticket"])
+    this.route.navigate(["/user/create"])
   }
-
 
 }

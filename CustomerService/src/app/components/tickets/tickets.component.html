@@ -2,8 +2,9 @@
     <mat-sidenav-container>
         <mat-sidenav mode="side" opened={{opened}}>
         <div class="menu">
-            <img src="./../../../assets/img/pp default.png"  width="180px" height="180px"/>
-            <h2>{{user}}</h2>
+            <img src="./../../../assets/img/pp client-male.png"  width="180px" height="180px"/>
+            <span><h2>{{user}}</h2>
+                <h3>{{role}}</h3></span>
             <div class="menuELE"><button mat-button color="primary" (click)="redirectDASH()" style="width: 14.5vw;height: 3vw;" >Dashboard</button></div>
             <button mat-button color="primary" (click)="redirectACC()" style="width: 14.5vw;height: 3vw;" >Profile</button>
             <button mat-raised-button color="primary" (click)="redirectTICK()" style="width: 14.5vw;height: 3vw;" >Tickets</button>
@@ -16,7 +17,20 @@
 
 
 
-            <p>Welcome <b>{{user}}</b> to your Tickets page.</p>
+            <div class="containerBOX2">
+                <div *ngFor="let ticket of tickets">
+                    <div class="containerBOX2">
+                        <li>{{ticket.cat}}</li>
+                        <li>{{ticket.desc}}</li>   
+                    </div>                 
+                </div>
+                <div style="display: flex;justify-content: space-between;">
+                    <div></div>
+                    <div>
+                        <button mat-raised-button color="primary" style="height: 38px;" ><p style="font-size: 1.2rem;" (click)="redirectCT()">Create Ticket</p></button>
+                    </div>
+                </div>
+            </div>
 
 
 

@@ -1,0 +1,49 @@
+<mat-sidenav-container>
+    <mat-sidenav mode="side" opened={{opened}}>
+    <div class="menu">
+        <img src="./../../../assets/img/pp client-male.png"  width="180px" height="180px"/>
+        <span><h2>{{user}}</h2>
+            <h3>{{role}}</h3></span>
+        <div class="menuELE"><button mat-button color="primary" (click)="redirectDASH()" style="width: 14.5vw;height: 3vw;" >Dashboard</button></div>
+        <button mat-button color="primary" (click)="redirectACC()" style="width: 14.5vw;height: 3vw;" >Profile</button>
+        <button mat-raised-button color="primary" (click)="redirectTICK()" style="width: 14.5vw;height: 3vw;" >Tickets</button>
+    </div>
+</mat-sidenav>
+<mat-sidenav-content>
+    <button mat-button isIconButton="true" color="primary" (click)="toggleSide()"><mat-icon>{{icon}}</mat-icon></button>
+    <div class="content">
+
+        <div class="containerBOX2">
+            <div style="display: flex;justify-content: space-between;">
+                <mat-form-field appearance="outline" hideRequiredMarker style="width:45% !important;">
+                    <mat-label>Issue Title</mat-label>
+                    <input matInput placeholder="Issue title" required id='title' >
+                </mat-form-field>
+                <mat-form-field appearance="fill" style="width:45% !important;">
+                    <mat-label>Login as</mat-label>
+                    <mat-select [(value)]="Cat">
+                        <mat-option value="Login issues">Login issues</mat-option>
+                        <mat-option value="Info Update">Info update</mat-option>
+                        <mat-option value="perchase">perchase</mat-option>
+                        <mat-option value="installation">Installation</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="outline" hideRequiredMarker style="width:100% !important;height: auto !important;">
+                    <mat-label>Details</mat-label>
+                    <textarea matInput placeholder="Details" required id='Desc' ></textarea>
+                </mat-form-field>
+            </div>
+            <div style="display: flex;justify-content: space-between;">
+                <div></div>
+                <div>
+                    <button mat-raised-button color="primary" style="height: 38px;" ><p style="font-size: 1.2rem;" (click)="submit()">Submit</p></button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</mat-sidenav-content>
+</mat-sidenav-container>

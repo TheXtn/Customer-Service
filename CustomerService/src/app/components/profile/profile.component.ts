@@ -8,18 +8,22 @@ import { LibService } from 'src/app/services/lib/lib.service';
 })
 export class ProfileComponent implements OnInit {
   user :string="Default";
+  mail:string="Default@mail.tn"
+  role:string="Client"
   opened:boolean = true
   icon:string ="keyboard_backspace"
   constructor(private route:Router,private libService:LibService) { }
 
   async ngOnInit(): Promise<void> {
-    /*const isloggedin = await this.libService.isLoggedin()
+    const isloggedin = await this.libService.isLoggedin()
     if (isloggedin == false){
       this.route.navigate(['/login'])
     }else{
     const data=await this.libService.getCurrentUser()
     this.user=data.user.name
-    }*/
+    this.mail=data.user.email
+    if (data.user.role == "User") {this.role = "Client"}
+    }
   }
   toggleSide(){
     this.opened = !this.opened

@@ -86,6 +86,28 @@ export class LibService {
     const data=res.json()
     return data
   }
+
+  async CreateTicket(cat:string,desc:string){
+    const config={
+      headers:{
+        'Content-Type':'application/json'
+      },
+      method:"Post",
+      body:JSON.stringify({
+        "cat": cat,
+        "desc": desc,
+      })
+    }
+    const res=await fetch("http://localhost:3000/api/User/createTicket",config)
+    const data=res.json()
+    return data
+  }
+
+  async getTickets(){
+    const res=await fetch('http://localhost:3000/api/User/showTickets',{credentials: 'include'})
+    const data=await res.json();
+    return data
+  }
   
  
 }
