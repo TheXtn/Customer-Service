@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LibService } from 'src/app/services/lib/lib.service';
 @Component({
-  selector: 'app-user-dashboard',
-  templateUrl: './user-dashboard.component.html',
-  styleUrls: ['./user-dashboard.component.css']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
-export class UserDashboardComponent implements OnInit {
+export class ProfileComponent implements OnInit {
   user :string="Default";
   opened:boolean = true
   icon:string ="keyboard_backspace"

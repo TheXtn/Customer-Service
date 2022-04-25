@@ -4,9 +4,9 @@
         <div class="menu">
             <img src="./../../../assets/img/pp default.png"  width="180px" height="180px"/>
             <h2>{{user}}</h2>
-            <div class="menuELE"><button mat-raised-button color="primary" (click)="redirectDASH()" style="width: 14.5vw;height: 3vw;" >Dashboard</button></div>
+            <div class="menuELE"><button mat-button color="primary" (click)="redirectDASH()" style="width: 14.5vw;height: 3vw;" >Dashboard</button></div>
             <button mat-button color="primary" (click)="redirectACC()" style="width: 14.5vw;height: 3vw;" >Profile</button>
-            <button mat-button color="primary" (click)="redirectTICK()" style="width: 14.5vw;height: 3vw;" >Tickets</button>
+            <button mat-raised-button color="primary" (click)="redirectTICK()" style="width: 14.5vw;height: 3vw;" >Tickets</button>
         </div>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -16,12 +16,12 @@
 
 
 
-            <p>Welcome <b>{{user}}</b> to your dashboard page.</p>
+            <p>Welcome <b>{{user}}</b> to your Tickets page.</p>
 
 
 
 
-
+            
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

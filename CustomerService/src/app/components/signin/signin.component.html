@@ -6,7 +6,7 @@
         <br>
          <mat-form-field appearance="outline" hideRequiredMarker style="width:21.5vw !important;">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="pat@example.com" [formControl]="email" required id='login'>
+            <input matInput placeholder="pat@example.com" [formControl]="email" required id='login' >
             <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <br>

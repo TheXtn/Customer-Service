@@ -69,7 +69,6 @@ export class SignupComponent implements OnInit {
     else if (pass1 ==''){ok = false;alert('Password is required')}
     else if (pass1 != pass2){ok=false;alert('Passwords not matching!')}
     if(LastName != ''){ name = name+LastName}
-    console.log(name);
 
     if(ok == true){
       const reg = await this.libService.RegisterUser(name,email,pass1);

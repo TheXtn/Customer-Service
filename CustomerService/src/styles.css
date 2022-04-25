@@ -10,6 +10,13 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+.menu {
+  justify-content: center;
+  text-align: center;
+}
+.menuELE{
+  margin-top: 10vh;
+}
 .selector {
   background-image: url("./assets/img/Sign BG.jpg");
   background-size: cover;

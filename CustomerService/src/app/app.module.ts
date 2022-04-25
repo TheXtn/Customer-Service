@@ -23,6 +23,9 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
 import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './components/signup/signup.component';
 import { SidebarModule } from 'ng-sidebar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { ProfileComponent } from './components/profile/profile.component';
+import { TicketsComponent } from './components/tickets/tickets.component';
 
 const appRoutes: Routes=[
   {path:'',component: HomeComponent,},
@@ -30,6 +33,8 @@ const appRoutes: Routes=[
   {path:'signup',component:SignupComponent},
   {path: 'user',children:[
     {path:'dashboard', component: UserDashboardComponent,},
+    {path:'profile', component: ProfileComponent,},
+    {path:'tickets', component: TicketsComponent,},
   ]},
 ]
 
@@ -42,6 +47,8 @@ const appRoutes: Routes=[
     SigninComponent,
     UserDashboardComponent,
     SignupComponent,
+    ProfileComponent,
+    TicketsComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +67,7 @@ const appRoutes: Routes=[
     MatSelectModule,
     SidebarModule.forRoot(),
     RouterModule.forRoot(appRoutes, {enableTracing: true}),
+    MatSidenavModule,
   ],
   providers: [HeaderComponent],
   bootstrap: [AppComponent]
