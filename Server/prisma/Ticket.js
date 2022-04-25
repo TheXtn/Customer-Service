@@ -1,5 +1,14 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
+export const CheckForClosedTicket=async (ticketID)=>{
+    const res=await prisma.ticket.findUnique({
+        where:{
+            id:ticketID
+        }
+    })
+    return res.closed
+
+}
 export const CreateTicket=async (TicketObject)=>{
     const res=await prisma.ticket.create({
             data:TicketObject
@@ -7,6 +16,11 @@ export const CreateTicket=async (TicketObject)=>{
     return res
 }
 export const UpdateTicket=async (TicketObject)=>{
+    if (await CheckForClosedTicket(TicketObject.ticketID)){
+        return{
+            Error:"Ticket is closed !"
+        }
+    }
     const ticketdiscs=await prisma.ticket.findUnique({
         where:{
             id:TicketObject.ticketID
@@ -28,6 +42,11 @@ export const UpdateTicket=async (TicketObject)=>{
     return res
 }
 export const UserCloseTicket=async(ticketID,authorID)=>{
+    if (await CheckForClosedTicket(ticketID)){
+        return{
+            Error:"Ticket Already closed !"
+        }
+    }
     const ticket=await prisma.ticket.findUnique({
         where:{
             id:ticketID
@@ -50,14 +69,10 @@ export const UserCloseTicket=async(ticketID,authorID)=>{
     return res
 }
 export const ShowAllUserTickets=async(UserObject)=>{
-    const res=await prisma.user.findUnique({
+    const res=await prisma.ticket.findMany({
         where:{
-            id:UserObject.id,
-            email:UserObject.email
+            authorID:UserObject.id,
         },
-        include: {
-            tickets: true,
-          },
     })
     return res
 }
