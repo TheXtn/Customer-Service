@@ -14,7 +14,8 @@ export default async function handler(req, res) {
         name:name,
         email:email,
         password:hashedpwd,
-        catID:"624578c5a3adb4bbc4cb8cd9"
+        catID:"624578c5a3adb4bbc4cb8cd9",
+        role:"Tech"
     })
     res.status(200).json(resa)
   }

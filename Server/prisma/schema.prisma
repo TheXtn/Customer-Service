@@ -20,6 +20,7 @@ model Technician{
   password  String
   cat Categorie? @relation(fields: [catID],references: [id])
   catID String @db.ObjectId
+  role String
 
 }
 model Categorie{
@@ -34,6 +35,7 @@ model User{
   email  String @unique
   password  String
   tickets Ticket[]
+  role String
 }
 type Disscusion{
   authorEmail String

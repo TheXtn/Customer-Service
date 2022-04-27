@@ -38,6 +38,7 @@ export const LoginTech=async (TechObject) =>{
     return {
         id:DatabaseUser.id,
         email:DatabaseUser.email,
-        name:DatabaseUser.name
+        name:DatabaseUser.name,
+        role:DatabaseUser.role
     }
 }

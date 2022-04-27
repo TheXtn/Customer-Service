@@ -9,6 +9,7 @@ Table Technician {
   password String [not null]
   cat Categorie
   catID String [not null]
+  role String [not null]
 }
 
 Table Categorie {
@@ -24,6 +25,7 @@ Table User {
   email String [unique, not null]
   password String [not null]
   tickets Ticket [not null]
+  role String [not null]
 }
 
 Table Ticket {

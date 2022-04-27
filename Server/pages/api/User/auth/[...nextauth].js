@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
+import { getRole } from "../../../../prisma/helper";
 import { LoginUser } from "../../../../prisma/User";
 export default NextAuth({
   session: {
@@ -38,7 +39,8 @@ export default NextAuth({
     },
     async session({ session, user, token }) {
       session.user["userID"]=token.sub
-      session.user["role"]="User"
+      var role=await getRole(token.sub)
+      session.user["role"]=role
       return session
     },
     redirect({ url, baseUrl }) {

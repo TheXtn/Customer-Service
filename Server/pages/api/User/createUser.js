@@ -14,6 +14,7 @@ export default async function handler(req, res) {
         name:name,
         email:email,
         password:hashedpwd,
+        role:"User"
     })
     res.status(200).json(resa)
   }
