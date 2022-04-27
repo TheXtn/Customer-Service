@@ -88,17 +88,17 @@ export class LibService {
   }
 
   async CreateTicket(cat:string,desc:string){
-    const config={
+    const res=await fetch("http://localhost:3000/api/User/createTicket",{
+      credentials: 'include',
       headers:{
         'Content-Type':'application/json'
       },
       method:"Post",
       body:JSON.stringify({
-        "cat": cat,
-        "desc": desc,
+        "cat": "624578c5a3adb4bbc4cb8cd9",
+        "desc": desc
       })
-    }
-    const res=await fetch("http://localhost:3000/api/User/createTicket",config)
+    })
     const data=res.json()
     return data
   }
