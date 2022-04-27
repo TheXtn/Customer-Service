@@ -1,4 +1,5 @@
 <div *ngIf="found; else elseBlock">
+    <div *ngIf="(notLoading$ | async) ; else elseBlock">
     <div >
         <mat-sidenav-container>
             <mat-sidenav mode="side" opened={{opened}}>
@@ -16,24 +17,39 @@
             <div class="content">
     
     
-           <div class="containerBOX2" style="height: 87.5vh;">
-            <div class="containerBOX" style="width: 100%!important;">
+           <div  style="height: 87.5vh;">
+            <div class="containerBOX2" style="width: 100%!important;">
                 <div style="display: flex;justify-content: space-between;">
                     <span>
                         <h1>Issue: {{discussion[0].content}}</h1>
                     </span>
                 </div>
             </div>
-            <div class="containerBOX" style="width: 100%!important;height: 55vh;">
-                <div style="display: flex;justify-content: space-between;">
-                    
+            <div class="containerBOX2" style="width: 100%!important;height: 60vh;margin-top: 10px;" id="chat">
+                <div *ngFor="let m of discussion">
+                    <div *ngIf="m.authorEmail==userMAIL; else elseBlock">
+                        <div style="display: flex;justify-content: space-between;">
+                            <div class="containerBOX" style="background-color: rgba(5, 75, 133, 0.8);">
+                                <div style="color: white;">{{m.content}}</div>
+                            </div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <ng-template #elseBlock>
+                        <div style="display: flex;justify-content: space-between;">
+                            <div></div>
+                            <div class="containerBOX" >
+                                {{m.content}}
+                            </div>
+                        </div>
+                    </ng-template>
                 </div>
             </div>
-            <div class="containerBOX" style="width: 100%!important">
+            <div class="containerBOX2" style="width: 100%!important ;margin-top: 10px;">
                 <div style="display: flex;justify-content: space-between;"> 
                         <mat-form-field appearance="outline" style="width:99% !important;">
                             <mat-label>Reply</mat-label>
-                            <input matInput placeholder="Reply" id='reply' [(ngModel)]="reply" >
+                            <input matInput placeholder="Reply" id='reply' [(ngModel)]="message" >
                         </mat-form-field>
                         <button mat-icon-button isIconButton="true" color="primary" style="height: 6vh;" (click)="HandleReply()"><mat-icon>send</mat-icon></button>
                 </div>
@@ -45,6 +61,7 @@
         </mat-sidenav-content>
     </mat-sidenav-container>
     </div>
+</div>
 </div>
 
 
@@ -318,10 +335,10 @@
             <path class="st9" d="M320.3 257.8h549.9"/>
             <g id="Text">
               <text transform="translate(377.037 230.025)" class="st8 st10" font-size="21">
-                404
+                Loading
               </text>
               <text transform="translate(659.5 213.994)" class="st8 st10" font-size="24.025">
-              Page not found.
+              Please Wait...
               </text>
             </g>
             <g id="ladders">

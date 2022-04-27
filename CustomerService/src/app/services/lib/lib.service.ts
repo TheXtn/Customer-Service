@@ -115,7 +115,21 @@ export class LibService {
     return data
   }
 
-  
+  async sendMessage(ticketID:string,desc:string){
+    const res=await fetch("http://localhost:3000/api/User/updateTicket",{
+      credentials: 'include',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      method:"Post",
+      body:JSON.stringify({
+        "ticketID": ticketID,
+        "desc": desc
+      })
+    })
+    const data=res.json()
+    return data
+  }
   
  
 }
