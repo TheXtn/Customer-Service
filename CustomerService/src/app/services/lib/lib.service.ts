@@ -108,6 +108,14 @@ export class LibService {
     const data=await res.json();
     return data
   }
+
+  async getCat(){
+    const res=await fetch('http://localhost:3000/api/getCats',{credentials: 'include'})
+    const data=await res.json();
+    return data
+  }
+
+  
   
  
 }

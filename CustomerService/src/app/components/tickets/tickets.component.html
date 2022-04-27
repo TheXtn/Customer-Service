@@ -18,17 +18,18 @@
 
 
             <div class="containerBOX2">
-                <div *ngFor="let ticket of tickets">
-                    <div class="containerBOX2">
-                        <li>{{ticket.cat}}</li>
-                        <li>{{ticket.desc}}</li>   
-                    </div>                 
-                </div>
                 <div style="display: flex;justify-content: space-between;">
-                    <div></div>
+                    <div><h1>Showing all your tickets.</h1></div>
                     <div>
                         <button mat-raised-button color="primary" style="height: 38px;" ><p style="font-size: 1.2rem;" (click)="redirectCT()">Create Ticket</p></button>
                     </div>
+                </div>
+                <div *ngFor="let t of length">
+                    <div class="containerBOX2" style="margin-top: 1%;">
+                        <div style="display: flex;justify-content: space-between;">
+                            <div>{{t}}</div>
+                        </div>
+                    </div>                 
                 </div>
             </div>
 
