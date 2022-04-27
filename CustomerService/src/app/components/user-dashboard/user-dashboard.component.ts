@@ -16,7 +16,8 @@ export class UserDashboardComponent implements OnInit {
   opened:boolean = true
   icon:string ="keyboard_backspace"
   tickets:any[]=[];
-  Cats:any[]=[];
+  Cats:any[]=[];  
+  ticketIDS:string[]=[];
   Desc:any[]=[];
   resp:any[]=[];
   resp1:any[]=[];
@@ -82,6 +83,7 @@ export class UserDashboardComponent implements OnInit {
           this.cat.push(c.name)
         }
       }
+      this.ticketIDS.push(t.id)
       this.desc.push(t.disscusions[0].content)
       this.closed.push(t.closed)
     }
@@ -104,6 +106,10 @@ export class UserDashboardComponent implements OnInit {
 
   redirectDASH() {
     this.route.navigate(["/user/dashboard"])
+  }
+
+  reply(ID:string){
+    this.route.navigate(['/user/discussion',ID])
   }
 
 }

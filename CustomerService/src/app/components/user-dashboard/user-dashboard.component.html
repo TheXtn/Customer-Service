@@ -50,7 +50,7 @@
                                 <button mat-raised-button color="warn" style="height: 38px;"  disabled ><p>closed</p></button>
                             </div>
                             <ng-template #elseBlock>
-                                <button mat-raised-button color="primary" style="height: 38px;"  ><p>Reply</p></button>
+                                <button mat-raised-button color="primary" style="height: 38px;" (click)="reply(ticketIDS[index])" ><p>Reply</p></button>
                             </ng-template>
                         </div>
                     </div>                 
