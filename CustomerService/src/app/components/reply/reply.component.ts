@@ -20,6 +20,9 @@ export class ReplyComponent implements OnInit {
   discussion:any[]=[];
   ticket:any
   found:boolean=false;
+
+  reply:string="";
+
   constructor(private Aroute:ActivatedRoute,private libService:LibService,private route:Router) { }
 
   async ngOnInit(): Promise<void> {
@@ -70,4 +73,11 @@ export class ReplyComponent implements OnInit {
     this.route.navigate(["/user/dashboard"])
   }
 
+  HandleReply(){
+    console.log(this.reply)
+  }
+
+  redirectHOME(){
+    this.route.navigate(["/"])
+  }
 }

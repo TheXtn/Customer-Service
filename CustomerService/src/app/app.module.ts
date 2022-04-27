@@ -28,6 +28,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { TicketsComponent } from './components/tickets/tickets.component';
 import { CrtTicketComponent } from './components/crt-ticket/crt-ticket.component';
 import { ReplyComponent } from './components/reply/reply.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const appRoutes: Routes=[
   {path:'',component: HomeComponent,},
@@ -40,6 +41,8 @@ const appRoutes: Routes=[
     {path:'create-ticket', component: CrtTicketComponent,},
     {path:'discussion/:id', component: ReplyComponent,},
   ]},
+  { path: '**', pathMatch: 'full', 
+        component: PageNotFoundComponent },
 ]
 
 @NgModule({
@@ -55,6 +58,7 @@ const appRoutes: Routes=[
     TicketsComponent,
     CrtTicketComponent,
     ReplyComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
