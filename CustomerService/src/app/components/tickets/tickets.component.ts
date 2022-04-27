@@ -11,14 +11,18 @@ import { LibService } from 'src/app/services/lib/lib.service';
 export class TicketsComponent implements OnInit {
   user :string="Default";
   role :String="Client";
-  cat:string=""
-  Cat:string[]=[];
   length:number[]=[];
-  desc:string=""
-  Desc:string[]=[];
+  desc:string[]=[];
+  cat:string[]=[];
+  ticketIDS:string[]=[];
+  closed:boolean[]=[];
   opened:boolean = true
   icon:string ="keyboard_backspace"
   tickets:any[]=[];
+  Cats:any[]=[];
+  Desc:any[]=[];
+  resp:any[]=[];
+  resp1:any[]=[];
 
   constructor(private route:Router,private libService:LibService) {
    }
@@ -30,23 +34,30 @@ export class TicketsComponent implements OnInit {
     }else{
     const data=await this.libService.getCurrentUser()
     this.user=data.user.name
-    if (data.user.role == "User") {this.role = "Client"}
+    if (data.user.role == "User") {this.role = "Client"}else {this.role = "Technicien"}
     }
-    this.tickets=await this.libService.getTickets()
-    const cat=await this.libService.getCat()
-    console.log(this.tickets)
-    console.log(cat)
-    for (let t=0;t<this.tickets.length+1;t++){
-      for (let c=0;c<cat.length+1;c++){
-        if (this.tickets[t].catID == cat[c].id) {
-          this.Cat.push(cat[c].name)
-          break;
+    this.resp=await this.libService.getTickets()
+    this.resp1=await this.libService.getCat()
+    this.resp.map((items)=>{
+      this.tickets.push(items)
+    })
+    this.resp1.map((items)=>{
+      this.Cats.push(items)
+    })
+    let i=0;
+    for (let t of this.tickets){
+      this.length.push(i)
+      i++
+      for (let c of this.Cats){
+        if(t.catID == c.id) {
+          this.cat.push(c.name)
         }
       }
-      this.Desc.push(this.tickets[t].disscusions[0].content)
-      console.log(this.desc)
+      this.ticketIDS.push(t.id)
+      this.desc.push(t.disscusions[0].content)
+      this.closed.push(t.closed)
     }
-    this.length = Array(5).map((x,i)=>i);
+    console.log(this.tickets)
     
   }
 
@@ -76,6 +87,10 @@ export class TicketsComponent implements OnInit {
 
   redirectCT() {
     this.route.navigate(["/user/create-ticket"])
+  }
+
+  reply(catID:string){
+    this.route.navigate(['/user/discussion',catID])
   }
 
 

@@ -12,6 +12,15 @@ export class ProfileComponent implements OnInit {
   role:string="Client"
   opened:boolean = true
   icon:string ="keyboard_backspace"
+
+  length:number[]=[];
+  Category:string=''
+  Cat:any[]=[];
+  Cats:any[]=[];
+  catNames:string[]=[];
+  catIDS:string[]=[];
+
+
   constructor(private route:Router,private libService:LibService) { }
 
   async ngOnInit(): Promise<void> {
@@ -22,7 +31,16 @@ export class ProfileComponent implements OnInit {
     const data=await this.libService.getCurrentUser()
     this.user=data.user.name
     this.mail=data.user.email
-    if (data.user.role == "User") {this.role = "Client"}
+    if (data.user.role == "User") {this.role = "Client"}else {this.role = "Technicien"}
+    }
+    this.Cat = await this.libService.getCat()
+    this.Cat.map((items)=>{this.Cats.push(items)})
+    let i=0
+    for (let c of this.Cats){
+      this.catNames.push(c.name)
+      this.catIDS.push(c.id)
+      this.length.push(i)
+      i++
     }
   }
   toggleSide(){
@@ -43,5 +61,11 @@ export class ProfileComponent implements OnInit {
   redirectDASH() {
     this.route.navigate(["/user/dashboard"])
   }
+  updateINFO() {
+    
+  }
 
+  updatePASS() {
+
+  }
 }

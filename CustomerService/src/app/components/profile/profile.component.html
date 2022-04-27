@@ -34,10 +34,22 @@
                             <mat-label>{{user}}</mat-label>
                             <input matInput placeholder="First Name" required id='Fname' >
                         </mat-form-field>
-                        <mat-form-field appearance="outline" hideRequiredMarker style="width:45% !important;">
-                            <mat-label>{{user}}</mat-label>
-                            <input matInput placeholder="Last Name" required id='Fname' >
-                        </mat-form-field>
+                        <div *ngIf="role=='Client'; else elseBlock">
+                            <mat-form-field appearance="outline" hideRequiredMarker style="width:45% !important;">
+                                <mat-label>{{user}}</mat-label>
+                                <input matInput placeholder="Last Name" required id='Lname' >
+                            </mat-form-field>
+                        </div>
+                        <ng-template #elseBlock>
+                            <mat-form-field appearance="fill" style="width:45% !important;">
+                                <mat-label>Category</mat-label>
+                                <mat-select [(value)]="Category">
+                                    <div *ngFor="let index of length">
+                                        <mat-option value={{catIDS[index]}}>{{catNames[index]}}</mat-option>
+                                    </div>
+                                </mat-select>
+                            </mat-form-field>
+                        </ng-template>
                 </div>
                 <div style="display: flex;justify-content: space-between;">
                     <mat-form-field appearance="outline" hideRequiredMarker style="width:100% !important;">
@@ -47,7 +59,7 @@
                 </div>
                 <div style="display: flex;justify-content: space-between;">
                 <div></div>
-                <button mat-raised-button color="primary" style="height: 38px;"><p style="font-size: 1.2rem;">Update info</p></button>
+                <button mat-raised-button color="primary" style="height: 38px;"><p style="font-size: 1.2rem;"(click)="updateINFO()">Update info</p></button>
                 </div>
             </div>
             <br>
@@ -71,7 +83,7 @@
             </div>
                 <div style="display: flex;justify-content: space-between;">
                     <div></div>
-                    <button mat-raised-button color="primary" style="height: 38px;" ><p style="font-size: 1.2rem;">Update password</p></button>
+                    <button mat-raised-button color="primary" style="height: 38px;" ><p style="font-size: 1.2rem;" (click)="updatePASS()">Update password</p></button>
                 </div>
             </div>
 

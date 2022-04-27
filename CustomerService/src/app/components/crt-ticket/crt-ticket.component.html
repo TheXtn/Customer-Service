@@ -20,12 +20,11 @@
                     <input matInput placeholder="Issue title" required id='title' >
                 </mat-form-field>
                 <mat-form-field appearance="fill" style="width:45% !important;">
-                    <mat-label>Login as</mat-label>
-                    <mat-select [(value)]="Cat">
-                        <mat-option value="Login issues">Login issues</mat-option>
-                        <mat-option value="Info Update">Info update</mat-option>
-                        <mat-option value="perchase">perchase</mat-option>
-                        <mat-option value="installation">Installation</mat-option>
+                    <mat-label>Category</mat-label>
+                    <mat-select [(value)]="Category">
+                        <div *ngFor="let index of length">
+                            <mat-option value={{catIDS[index]}}>{{catNames[index]}}</mat-option>
+                        </div>
                     </mat-select>
                 </mat-form-field>
             </div>

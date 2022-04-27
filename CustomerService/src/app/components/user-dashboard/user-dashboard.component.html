@@ -38,10 +38,21 @@
             </div>
             <br>
             <div class="containerBOX2">
-                <div *ngFor="let ticket of tickets">
-                    <div class="containerBOX2">
-                        <li>{{ticket.cat}}</li>
-                        <li>{{ticket.desc}}</li>   
+                <div><h1>Showing your recent tickets.</h1></div>
+                <div *ngFor="let index of length">
+                    <div class="containerBOX2" style="margin-top: 1%;">
+                        <div style="display: flex;justify-content: space-between;">
+                            <span style="text-align: center;"><div><b>Category</b></div>
+                            <div>{{cat[index]}}</div></span>
+                            <span style="text-align: center;min-width: 200px;"><div><b>Issue</b></div>
+                            <div>{{desc[index]}}</div></span>
+                            <div *ngIf="closed[index]; else elseBlock">
+                                <button mat-raised-button color="warn" style="height: 38px;"  disabled ><p>closed</p></button>
+                            </div>
+                            <ng-template #elseBlock>
+                                <button mat-raised-button color="primary" style="height: 38px;"  ><p>Reply</p></button>
+                            </ng-template>
+                        </div>
                     </div>                 
                 </div>
             </div>

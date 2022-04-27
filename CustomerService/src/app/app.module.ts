@@ -27,6 +27,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TicketsComponent } from './components/tickets/tickets.component';
 import { CrtTicketComponent } from './components/crt-ticket/crt-ticket.component';
+import { ReplyComponent } from './components/reply/reply.component';
 
 const appRoutes: Routes=[
   {path:'',component: HomeComponent,},
@@ -37,6 +38,7 @@ const appRoutes: Routes=[
     {path:'profile', component: ProfileComponent,},
     {path:'tickets', component: TicketsComponent,},
     {path:'create-ticket', component: CrtTicketComponent,},
+    {path:'discussion/:id', component: ReplyComponent,},
   ]},
 ]
 
@@ -52,6 +54,7 @@ const appRoutes: Routes=[
     ProfileComponent,
     TicketsComponent,
     CrtTicketComponent,
+    ReplyComponent,
   ],
   imports: [
     BrowserModule,

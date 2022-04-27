@@ -14,8 +14,12 @@ export class CrtTicketComponent implements OnInit {
 
   user: string="Default"
   role:String="Client"
-
-  Cat:string=''
+  length:number[]=[];
+  Category:string=''
+  Cat:any[]=[];
+  Cats:any[]=[];
+  catNames:string[]=[];
+  catIDS:string[]=[];
 
   constructor(private route:Router,private libService:LibService) { }
 
@@ -26,10 +30,19 @@ export class CrtTicketComponent implements OnInit {
     }else{
     const data=await this.libService.getCurrentUser()
     this.user=data.user.name
-    if (data.user.role == "User") {this.role = "Client"}
+    if (data.user.role == "User") {this.role = "Client"}else {this.role = "Technicien"}
     }
-    const tickets=await this.libService.getTickets()
-    console.log(tickets)
+
+    this.Cat = await this.libService.getCat()
+    this.Cat.map((items)=>{this.Cats.push(items)})
+    let i=0
+    for (let c of this.Cats){
+      this.catNames.push(c.name)
+      this.catIDS.push(c.id)
+      this.length.push(i)
+      i++
+    }
+
   }
 
   toggleSide(){
@@ -42,11 +55,11 @@ export class CrtTicketComponent implements OnInit {
   }
 
   async submit(){
-    if (this.Cat == ""){
+    if (this.Category == ""){
       alert("Please choose a category.")
     }else{
       let desc = (<HTMLInputElement>document.getElementById('Desc')).value;
-      const reg = await this.libService.CreateTicket(this.Cat,desc);
+      const reg = await this.libService.CreateTicket(this.Category,desc);
       this.route.navigate(['/user/tickets'])
     }
   }

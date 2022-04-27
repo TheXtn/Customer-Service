@@ -1,0 +1,46 @@
+<div >
+    <mat-sidenav-container>
+        <mat-sidenav mode="side" opened={{opened}}>
+        <div class="menu">
+            <img src="./../../../assets/img/pp client-male.png"  width="180px" height="180px"/>
+            <span><h2>{{user}}</h2>
+                <h3>{{role}}</h3></span>
+            <div class="menuELE"><button mat-button color="primary" (click)="redirectDASH()" style="width: 14.5vw;height: 3vw;" >Dashboard</button></div>
+            <button mat-button color="primary" (click)="redirectACC()" style="width: 14.5vw;height: 3vw;" >Profile</button>
+            <button mat-raised-button color="primary" (click)="redirectTICK()" style="width: 14.5vw;height: 3vw;" >Tickets</button>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <button mat-button isIconButton="true" color="primary" (click)="toggleSide()"><mat-icon>{{icon}}</mat-icon></button>
+        <div class="content">
+
+
+       <div class="containerBOX2" style="height: 87.5vh;">
+        <div class="containerBOX" style="width: 100%!important;">
+            <div style="display: flex;justify-content: space-between;">
+                <span>
+                    <h1>Issue: {{discussion[0].content}}</h1>
+                </span>
+            </div>
+        </div>
+        <div class="containerBOX" style="width: 100%!important;height: 55vh;">
+            <div style="display: flex;justify-content: space-between;">
+                
+            </div>
+        </div>
+        <div class="containerBOX" style="width: 100%!important">
+            <div style="display: flex;justify-content: space-between;">
+                <mat-form-field appearance="outline" hideRequiredMarker style="width:99% !important;">
+                    <mat-label>Reply</mat-label>
+                    <input matInput placeholder="Reply" required id='reply' >
+                </mat-form-field>
+                <button mat-icon-button isIconButton="true" color="primary" style="height: 6vh;"><mat-icon>send</mat-icon></button>
+            </div>
+        </div>
+       </div>
+
+            
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+</div>

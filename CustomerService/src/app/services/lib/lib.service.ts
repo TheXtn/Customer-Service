@@ -95,7 +95,7 @@ export class LibService {
       },
       method:"Post",
       body:JSON.stringify({
-        "cat": "624578c5a3adb4bbc4cb8cd9",
+        "cat": cat,
         "desc": desc
       })
     })
