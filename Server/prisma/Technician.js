@@ -1,6 +1,19 @@
 import { PrismaClient } from '@prisma/client'
 import { verif } from '../lib/auth'
 const prisma = new PrismaClient()
+export const getTechTickets=async (TechObject)=>{
+    const tech=await prisma.technician.findUnique({
+        where:{
+            email:TechObject.email
+        }
+    })
+    const tickets=await prisma.ticket.findMany({
+        where:{
+            catID:tech.catID
+        }
+    })
+    return tickets
+}
 export const CreateTech=async (TechObject) =>{
     const checkforuser=await prisma.technician.findUnique({
         where:{

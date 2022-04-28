@@ -22,16 +22,16 @@ export default function Log(props){
            
            let bodyContent = JSON.stringify({
              "csrfToken": csrf,
-             "email": "islem@admin.tn",
+             "email": "me@admin.tn",
              "name": "admin",
-             "password": "islem"
+             "password": "me"
            });
         const config={
             method: "POST",
             body: bodyContent,
             headers: headersList
         }
-        const res=await fetch("http://localhost:3000/api/User/auth/callback/credentials",config)
+        const res=await fetch("http://localhost:3000/api/Technician/auth/callback/credentials",config)
         router.push("/login")
     }
     async function handlelogout(){
