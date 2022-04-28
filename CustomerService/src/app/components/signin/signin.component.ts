@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { DataService } from 'src/app/services/data.service';
 import {FormControl, Validators} from '@angular/forms';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-signin',
@@ -14,6 +15,7 @@ export class SigninComponent implements OnInit {
   hide :boolean =true;
   logtxt : string="";
   Role :string='';
+  notLoading$:Observable<boolean>=of(true)
   constructor(private data:DataService,private libService:LibService,private route:Router,private head:HeaderComponent) { 
 
   }
@@ -33,12 +35,14 @@ export class SigninComponent implements OnInit {
   }
   
   async ngOnInit(): Promise<void> {
+    this.notLoading$=of(false)
     document.body.className = "selector";
     this.data.currentMessage.subscribe(message => this.logtxt = message);
     const isloggedin = await this.libService.isLoggedin()
     if (isloggedin){
       this.route.navigate(['/user/dashboard'])
     }
+    this.notLoading$=of(true)
   }
 
   ngOnDestroy(){
@@ -64,16 +68,20 @@ export class SigninComponent implements OnInit {
         if (ok==true){
 
             if (this.Role =="Customer") {
+              this.notLoading$=of(false)
             const log=await this.libService.logUser(login,pass,csrf)
             if (log==404){
               alert("Email or password incorrect!")
+              this.notLoading$=of(true)
             }else{
               this.data.changeLogtxt('Logout')
               this.route.navigate(['/user/dashboard'])
             }
           }else if (this.Role =="Technicien") {
+            this.notLoading$=of(false)
             const log=await this.libService.logTech(login,pass,csrf)
             if (log==404){
+              this.notLoading$=of(true)
               alert("Email or password incorrect!")
             }else{
               this.data.changeLogtxt('Logout')

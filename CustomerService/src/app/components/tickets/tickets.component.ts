@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CategoryScale } from 'chart.js';
 import { LibService } from 'src/app/services/lib/lib.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-tickets',
@@ -23,11 +23,13 @@ export class TicketsComponent implements OnInit {
   Desc:any[]=[];
   resp:any[]=[];
   resp1:any[]=[];
+  notLoading$:Observable<boolean>=of(true)
 
   constructor(private route:Router,private libService:LibService) {
    }
 
   async ngOnInit(): Promise<void> {
+    this.notLoading$=of(false)
     const isloggedin = await this.libService.isLoggedin()
     if (isloggedin == false){
       this.route.navigate(['/login'])
@@ -58,6 +60,7 @@ export class TicketsComponent implements OnInit {
       this.closed.push(t.closed)
     }
     console.log(this.tickets)
+    this.notLoading$=of(true)
     
   }
 

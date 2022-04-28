@@ -22,6 +22,7 @@
     "@angular/router": "~13.2.0",
     "chart.js": "^3.7.1",
     "ng-sidebar": "^9.4.3",
+    "pusher-js": "^7.1.0-beta",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

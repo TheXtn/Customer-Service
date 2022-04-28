@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { PageNotFoundComponent } from '../components/page-not-found/page-not-found.component';
 
 
 @Injectable({
@@ -7,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DataService {
 
-  private messageSource = new BehaviorSubject<string>("Default message");
+  private messageSource = new BehaviorSubject<string>("Login");
   currentMessage =this.messageSource.asObservable();
   constructor() { }
   

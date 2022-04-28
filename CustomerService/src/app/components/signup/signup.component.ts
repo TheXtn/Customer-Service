@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { LibService } from 'src/app/services/lib/lib.service';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -13,6 +14,7 @@ export class SignupComponent implements OnInit {
   hide2 :boolean =true;
   pass2Color :string="primary";
   passErrorMessage :string='';
+  notLoading$:Observable<boolean>=of(true)
 
 
   constructor(private libService:LibService,private route:Router) { }
@@ -49,11 +51,13 @@ export class SignupComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.notLoading$=of(false)
     document.body.className = "selector";
     const isloggedin = await this.libService.isLoggedin()
     if (isloggedin){
       this.route.navigate(['/user/dashboard'])
     }
+    this.notLoading$=of(true)
   }
 
   async Register() {
@@ -71,6 +75,7 @@ export class SignupComponent implements OnInit {
     if(LastName != ''){ name = name+LastName}
 
     if(ok == true){
+      this.notLoading$=of(false)
       const reg = await this.libService.RegisterUser(name,email,pass1);
       this.route.navigate(['/login'])
     }
