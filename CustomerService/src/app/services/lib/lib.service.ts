@@ -130,6 +130,9 @@ export class LibService {
     const data=res.json()
     return data
   }
+  async CloseTicket(ticketID:string){
+    
+  }
   
  
 }

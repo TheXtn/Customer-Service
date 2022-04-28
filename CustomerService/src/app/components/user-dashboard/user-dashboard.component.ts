@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LibService } from 'src/app/services/lib/lib.service';
 import {Chart} from 'node_modules/chart.js'
 import {registerables} from 'chart.js'; 
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -25,17 +26,63 @@ export class UserDashboardComponent implements OnInit {
   cat:string[]=[];
   closed:boolean[]=[];
   length:number[]=[];
+  notLoading$:Observable<boolean>=of(true)
 
   //Propre dahsboard
   openTicketsCount:string = "N/A";
   closedTicketsCount:string = "N/A";
+  dataOpen:number=50;
+  dataClosed:number=50;
 
   constructor(private route:Router,private libService:LibService) { }
 
   async ngOnInit(): Promise<void> {
+    this.notLoading$=of(false)
+    const isloggedin = await this.libService.isLoggedin()
+    if (isloggedin == false){
+      this.route.navigate(['/login'])
+    }else{
+    const data=await this.libService.getCurrentUser()
+    this.user=data.user.name
+    console.log(data)
+    if (data.user.role == "User") {this.role = "Client"} else {this.role = "Technicien"}
+    }
+    this.resp=await this.libService.getTickets()
+    this.resp1=await this.libService.getCat()
+    this.resp.map((items)=>{
+      this.tickets.push(items)
+    })
+    this.resp1.map((items)=>{
+      this.Cats.push(items)
+    })
+    let i=0;
+    for (let t of this.tickets){
+      if (i<=4){
+        this.length.push(i)
+        i++
+      }
+      for (let c of this.Cats){
+        if(t.catID == c.id) {
+          this.cat.push(c.name)
+        }
+      }
+      this.ticketIDS.push(t.id)
+      this.desc.push(t.disscusions[0].content)
+      this.closed.push(t.closed)
+    }
+    console.log(this.closed)
+    this.notLoading$=of(true)
+    let closedCount = 0;
+    let openCount=0;
+    for (let i of this.closed){if (i==true){closedCount++}else[openCount++]}
+    this.dataClosed = ((closedCount/this.closed.length)*100)
+    this.dataOpen = ((openCount/this.closed.length)*100)
+    this.closedTicketsCount = closedCount.toString()
+    this.openTicketsCount = openCount.toString()
+
     Chart.register(...registerables);
     var data = [{
-      data: [35, 65],
+      data: [this.dataClosed, this.dataOpen],
       labels: ["Open Tickets", "Closed Tickets"],
       backgroundColor: [
           "rgba(255, 0, 0, 0.8)", //red
@@ -54,40 +101,6 @@ export class UserDashboardComponent implements OnInit {
         maintainAspectRatio: true,
       }
   });
-    const isloggedin = await this.libService.isLoggedin()
-    if (isloggedin == false){
-      this.route.navigate(['/login'])
-    }else{
-    const data=await this.libService.getCurrentUser()
-    this.user=data.user.name
-    console.log(data)
-    if (data.user.role == "User") {this.role = "Client"} else {this.role = "Technicien"}
-    }
-
-    this.resp=await this.libService.getTickets()
-    this.resp1=await this.libService.getCat()
-    this.resp.map((items)=>{
-      this.tickets.push(items)
-    })
-    this.resp1.map((items)=>{
-      this.cat.push(items)
-    })
-    let i=0;
-    for (let t of this.tickets){
-      if (i<=4){
-        this.length.push(i)
-        i++
-      }
-      for (let c of this.Cats){
-        if(t.catID == c.id) {
-          this.cat.push(c.name)
-        }
-      }
-      this.ticketIDS.push(t.id)
-      this.desc.push(t.disscusions[0].content)
-      this.closed.push(t.closed)
-    }
-    console.log(this.closed)
   }
   toggleSide(){
     this.opened = !this.opened
@@ -110,6 +123,9 @@ export class UserDashboardComponent implements OnInit {
 
   reply(ID:string){
     this.route.navigate(['/user/discussion',ID])
+  }
+  close(ID:string){
+    const resp = this.libService.CloseTicket(ID)
   }
 
 }

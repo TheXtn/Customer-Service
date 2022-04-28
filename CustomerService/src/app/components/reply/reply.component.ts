@@ -27,12 +27,16 @@ export class ReplyComponent implements OnInit {
 
   message:string="";
 
+  text1:string="Loading"
+  text2:string="Please Wait..."
+  homeBTN:boolean=false
+
   constructor(private Aroute:ActivatedRoute,private libService:LibService,private route:Router) { }
 
   async ngOnInit(): Promise<void> {
     let id=this.Aroute.snapshot.paramMap.get("id")
     this.ticketID=id
-
+    this.notLoading$=of(false)
     const isloggedin = await this.libService.isLoggedin()
     if (isloggedin == false){
       this.route.navigate(['/login'])
@@ -55,6 +59,11 @@ export class ReplyComponent implements OnInit {
         break
       }
     }
+    if (this.found == false){
+      this.text1="404"
+      this.text2="Page not Found"
+      this.homeBTN=true
+    }else{this.notLoading$=of(true)}
     this.ticket.disscusions.map((items:any)=>{this.discussion.push(items)})
     console.log(this.discussion)
     var objDiv = (<HTMLInputElement>document.getElementById('chat'));

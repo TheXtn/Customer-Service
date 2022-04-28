@@ -1,4 +1,13 @@
-<div class="leftF">
+<ng-template #loading style="background-color: white;">
+  <app-page-not-found text1="Loading" text2="Please Wait..." [homeBTN]="false"></app-page-not-found>
+</ng-template>
+
+
+
+
+
+<div *ngIf="(notLoading$ | async) ; else loading">
+  <div class="leftF">
     <div class="containerBOX">
         <div style="text-align: center;">
         <h1 style="font-size: 5rem;text-align: center;">Sign in</h1>
@@ -34,5 +43,6 @@
         <button mat-raised-button color="primary" style="width:21.5vw; height: 3.5rem;" (click)="login()"><p style="font-size: 1.2rem;">Sign in</p></button>
         <a routerLink="/signup"><p>Don't have an account? Join us instead...</p></a>
     </div>
+</div>
 </div>
 </div>
