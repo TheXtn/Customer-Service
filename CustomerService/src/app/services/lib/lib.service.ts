@@ -131,7 +131,18 @@ export class LibService {
     return data
   }
   async CloseTicket(ticketID:string){
-    
+    const res=await fetch("http://localhost:3000/api/User/closeTicket",{
+      credentials: 'include',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      method:"Post",
+      body:JSON.stringify({
+        "ticketID": ticketID
+      })
+    })
+    const data=res.json()
+    return data
   }
   
  

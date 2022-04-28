@@ -42,6 +42,7 @@ export class CrtTicketComponent implements OnInit {
       this.length.push(i)
       i++
     }
+    console.log(this.length)
 
   }
 

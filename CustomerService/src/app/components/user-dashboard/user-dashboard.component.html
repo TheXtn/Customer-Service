@@ -38,28 +38,33 @@
             </div>
             <br>
             <div class="containerBOX2">
-                <div><h1>Showing your recent tickets.</h1></div>
+                <div><h1>Showing your most recent open tickets.</h1></div>
                 <ng-template #loading>
                     <img src="../../../assets/img/loading.gif" width="80px" height="80px" style="margin-left: 50%;" />
                 </ng-template>
                 
                 <div *ngIf="(notLoading$ | async) ; else loading">
                     <div *ngFor="let index of length">
-                        <div class="containerBOX2" style="margin-top: 1%;">
-                            <div style="display: flex;justify-content: space-between;">
-                                <span style="text-align: center;"><div><b>Category</b></div>
-                                <div>{{cat[index]}}</div></span>
-                                <span style="text-align: center;min-width: 200px;"><div><b>Issue</b></div>
-                                <div>{{desc[index]}}</div></span>
-                                <div *ngIf="closed[index]; else elseBlock">
-                                    <button mat-raised-button color="warn" style="height: 38px;"  disabled ><p>Ticket is closed</p></button>
+                        <div *ngIf="closed[index]==false">
+                            <div class="containerBOX2" style="margin-top: 1%;">
+                                <div style="display: flex;justify-content: space-between;">
+                                    <span style="text-align: center;"><div><b>Category</b></div>
+                                    <div>{{cat[index]}}</div></span>
+                                    <span style="text-align: center;min-width: 200px;"><div><b>Issue</b></div>
+                                    <div>{{desc[index]}}</div></span>
+                                    <div *ngIf="closed[index]; else elseBlock">
+                                        <button mat-raised-button color="warn" style="height: 38px;"  disabled ><p>Ticket is closed</p></button>
+                                    </div>
+                                    <ng-template #elseBlock>
+                                        <span><button mat-raised-button color="primary" style="height: 38px;" (click)="reply(ticketIDS[index])" ><p>Reply</p></button>
+                                        <button mat-raised-button color="warn" style="height: 38px;" (click)="close(ticketIDS[index])" ><p>Close</p></button></span>
+                                    </ng-template>
                                 </div>
-                                <ng-template #elseBlock>
-                                    <span><button mat-raised-button color="primary" style="height: 38px;" (click)="reply(ticketIDS[index])" ><p>Reply</p></button>
-                                    <button mat-raised-button color="warn" style="height: 38px;" (click)="close(ticketIDS[index])" ><p>Close</p></button></span>
-                                </ng-template>
-                            </div>
-                        </div>                 
+                            </div>  
+                        </div>               
+                    </div>
+                    <div *ngIf="length.length == 0">
+                        <h2>No open tickets yet.</h2>
                     </div>
                 </div>
             </div>

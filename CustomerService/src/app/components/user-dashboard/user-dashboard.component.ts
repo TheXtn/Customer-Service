@@ -4,6 +4,9 @@ import { LibService } from 'src/app/services/lib/lib.service';
 import {Chart} from 'node_modules/chart.js'
 import {registerables} from 'chart.js'; 
 import { Observable, of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { OverlayDialogService } from 'src/app/services/overlay-dialog.service';
+import { MatOverlayComponent } from '../mat-overlay/mat-overlay.component';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -34,7 +37,9 @@ export class UserDashboardComponent implements OnInit {
   dataOpen:number=50;
   dataClosed:number=50;
 
-  constructor(private route:Router,private libService:LibService) { }
+  private dialogOverlay:OverlayDialogService ;
+
+  constructor(private route:Router,private libService:LibService,private dialog:MatDialog) { }
 
   async ngOnInit(): Promise<void> {
     this.notLoading$=of(false)
@@ -56,10 +61,14 @@ export class UserDashboardComponent implements OnInit {
       this.Cats.push(items)
     })
     let i=0;
+    let j=0;
     for (let t of this.tickets){
-      if (i<=4){
+      if (j<=4){
         this.length.push(i)
         i++
+        if (t.closed==false){
+          j++
+        }        
       }
       for (let c of this.Cats){
         if(t.catID == c.id) {
@@ -125,7 +134,10 @@ export class UserDashboardComponent implements OnInit {
     this.route.navigate(['/user/discussion',ID])
   }
   close(ID:string){
-    const resp = this.libService.CloseTicket(ID)
+      this.dialog.open(MatOverlayComponent,{
+        width: '300px',
+        data:{TID:ID}
+      })
   }
 
 }
