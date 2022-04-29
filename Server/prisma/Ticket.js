@@ -47,17 +47,7 @@ export const UserCloseTicket=async(ticketID,authorID)=>{
             Error:"Ticket Already closed !"
         }
     }
-    const ticket=await prisma.ticket.findUnique({
-        where:{
-            id:ticketID
-        },
-        
-    })
-    if (ticket.authorID!==authorID){
-        return {
-            message:"You are not the author"
-        }
-    }
+  
     const res=await prisma.ticket.update({
         where:{
             id:ticketID
@@ -71,7 +61,7 @@ export const UserCloseTicket=async(ticketID,authorID)=>{
 export const ShowAllUserTickets=async(UserObject)=>{
     const res=await prisma.ticket.findMany({
         where:{
-            authorID:UserObject.id,
+            authorID:UserObject.userID,
         },
     })
     return res
