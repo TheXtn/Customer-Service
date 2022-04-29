@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LibService } from 'src/app/services/lib/lib.service';
+import { LibService } from 'src/app/services/lib/lib.service'; 
 
 @Component({
   selector: 'app-home',
@@ -12,10 +12,19 @@ export class HomeComponent implements OnInit {
   constructor(private route:Router,private libService:LibService) { }
 
   async ngOnInit(): Promise<void> {
+    document.body.className = "selectorHOME";
     const isloggedin = await this.libService.isLoggedin()
     if (isloggedin){
       this.route.navigate(['/user/dashboard'])
     }
+  }
+
+  ngOnDestroy(){
+    document.body.className="";
+  }
+
+  redirectLOGIN(){
+    this.route.navigate(["/signup"])
   }
 
 }

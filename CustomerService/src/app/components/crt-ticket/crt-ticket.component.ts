@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { LibService } from 'src/app/services/lib/lib.service';
 
 @Component({
@@ -20,6 +21,11 @@ export class CrtTicketComponent implements OnInit {
   Cats:any[]=[];
   catNames:string[]=[];
   catIDS:string[]=[];
+  error:string=""
+  isWrong:boolean=false
+  
+
+  notLoading$: Observable<boolean>=of(true);
 
   constructor(private route:Router,private libService:LibService) { }
 
@@ -57,9 +63,11 @@ export class CrtTicketComponent implements OnInit {
 
   async submit(){
     if (this.Category == ""){
-      alert("Please choose a category.")
+      this.isWrong=true
+      this.error="Please choose a category!"
     }else{
       let desc = (<HTMLInputElement>document.getElementById('Desc')).value;
+      this.notLoading$=of(false)
       const reg = await this.libService.CreateTicket(this.Category,desc);
       this.route.navigate(['/user/tickets'])
     }

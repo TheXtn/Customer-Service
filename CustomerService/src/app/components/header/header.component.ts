@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
     if (isloggedin){this.data.changeLogtxt('Logout')}else{this.data.changeLogtxt('Login')}
   }
 
-  async redirect() {
+  async redirectLOGIN() {
     if(this.logtxt == "Login") {
       this.route.navigate(['/login'])
     } else {
@@ -30,5 +30,9 @@ export class HeaderComponent implements OnInit {
       this.data.changeLogtxt('Login')
      
     }
+  }
+
+  redirectHOME(){
+    this.route.navigate(['/'])
   }
 }
