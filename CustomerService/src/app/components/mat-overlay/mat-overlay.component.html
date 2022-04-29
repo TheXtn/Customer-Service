@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Hi</h1>
+<div mat-dialog-content>
+  <p>Are you sure you want to close this ticket?</p>
+  <div *ngIf="disabled == true">
+      <img src="../../../assets/img/loading.gif" width="70px" height="70px" />
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" [mat-dialog-close] disabled="{{disabled}}">Not really</button>
+  <button mat-raised-button color="primary" (click)="close(data.TID)" disabled="{{disabled}}" >YES</button>
+</div>

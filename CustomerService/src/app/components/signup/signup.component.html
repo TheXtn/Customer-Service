@@ -50,10 +50,19 @@
         <mat-checkbox color="primary" >Remember Me</mat-checkbox>
         <br>
         <br>
-        
+        <div *ngIf="isWrong">
+          <div style="border: 1px solid red;overflow: auto;border-radius: 15px;width: 15vw; margin-left: 25%;">
+            <p style="color:red;">{{error}}</p>
+          </div>
+        </div><br>
+        </div>
         <button mat-raised-button color="primary" style="width:21.5vw; height: 3.5rem;" ><p style="font-size: 1.2rem;" (click)="Register()">Sign up</p></button>
         <a routerLink="/login"><p>already have an account? Login instead...</p></a>
     </div>
+    <div style="text-align: center; margin-top: 5%;">
+      <p>Made with ❤ by</p>
+      <p>Islem Bargaoui & Youssef Mrabet</p>
+  </div>
 </div>
 </div>
 </div>

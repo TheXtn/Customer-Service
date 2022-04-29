@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LibService } from 'src/app/services/lib/lib.service';
 import { Observable, of } from 'rxjs';
+import { MatOverlayComponent } from '../mat-overlay/mat-overlay.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-tickets',
@@ -24,8 +26,9 @@ export class TicketsComponent implements OnInit {
   resp:any[]=[];
   resp1:any[]=[];
   notLoading$:Observable<boolean>=of(true)
+  yes:boolean=false
 
-  constructor(private route:Router,private libService:LibService) {
+  constructor(private route:Router,private libService:LibService,private dialog:MatDialog) {
    }
 
   async ngOnInit(): Promise<void> {
@@ -36,9 +39,10 @@ export class TicketsComponent implements OnInit {
     }else{
     const data=await this.libService.getCurrentUser()
     this.user=data.user.name
-    if (data.user.role == "User") {this.role = "Client"}else {this.role = "Technicien"}
+    if (data.user.role == "User") {this.role = "Client";this.yes=true}else {this.role = "Technicien"}
     }
-    this.resp=await this.libService.getTickets()
+    if (this.role == "Client"){this.resp=await this.libService.getTickets()}
+    else {this.resp=await this.libService.getTicketsTech()}
     this.resp1=await this.libService.getCat()
     this.resp.map((items)=>{
       this.tickets.push(items)
@@ -95,6 +99,14 @@ export class TicketsComponent implements OnInit {
   reply(catID:string){
     this.route.navigate(['/user/discussion',catID])
   }
+
+  close(ID:string){
+    this.dialog.open(MatOverlayComponent,{
+      width: '300px',
+      disableClose: true,
+      data:{TID:ID}
+    })
+}
 
 
 }

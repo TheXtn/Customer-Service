@@ -39,10 +39,20 @@
           </mat-form-field>                
           <mat-checkbox color="primary" >Remember Me</mat-checkbox> <p> Forgot password?</p>
         <br>
-        
+        <div *ngIf="isWrong">
+          <div style="border: 1px solid red;overflow: auto;border-radius: 15px;width: 15vw; margin-left: 25%;">
+            <p style="color:red;">{{error}}</p>
+          </div>
+        </div><br>
+        </div>
         <button mat-raised-button color="primary" style="width:21.5vw; height: 3.5rem;" (click)="login()"><p style="font-size: 1.2rem;">Sign in</p></button>
         <a routerLink="/signup"><p>Don't have an account? Join us instead...</p></a>
     </div>
+    <div style="text-align: center; margin-top: 5%;">
+          <p>Made with ❤ by</p>
+          <p>Islem Bargaoui & Youssef Mrabet</p>
+      </div>
 </div>
+
 </div>
 </div>

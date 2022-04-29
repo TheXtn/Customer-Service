@@ -3,13 +3,18 @@
         <mat-sidenav-container>
             <mat-sidenav mode="side" opened={{opened}}>
             <div class="menu">
-                <img src="./../../../assets/img/pp client-male.png"  width="180px" height="180px"/>
+              <div *ngIf="role=='Client'"><img src="./../../../assets/img/pp client-male.png"  width="180px" height="180px"/></div>
+              <div *ngIf="role=='Technicien'"><img src="./../../../assets/img/pp Technicien.png"  width="180px" height="180px"/></div>
                 <span><h2>{{user}}</h2>
                     <h3>{{role}}</h3></span>
                 <div class="menuELE"><button mat-button color="primary" (click)="redirectDASH()" style="width: 14.5vw;height: 3vw;" >Dashboard</button></div>
                 <button mat-button color="primary" (click)="redirectACC()" style="width: 14.5vw;height: 3vw;" >Profile</button>
                 <button mat-raised-button color="primary" (click)="redirectTICK()" style="width: 14.5vw;height: 3vw;" >Tickets</button>
             </div>
+            <div style="text-align: center; margin-top: 70%;">
+              <p>Made with ❤ by</p>
+              <p>Islem Bargaoui & Youssef Mrabet</p>
+          </div>
         </mat-sidenav>
         <mat-sidenav-content>
             <button mat-button isIconButton="true" color="primary" (click)="toggleSide()"><mat-icon>{{icon}}</mat-icon></button>
@@ -37,8 +42,8 @@
                     <ng-template #elseBlock>
                         <div style="display: flex;justify-content: space-between;">
                             <div></div>
-                            <div class="containerBOX" >
-                                {{m.content}}
+                            <div class="containerBOX">
+                              {{m.content}}
                             </div>
                         </div>
                     </ng-template>

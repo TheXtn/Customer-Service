@@ -15,6 +15,8 @@ export class SignupComponent implements OnInit {
   pass2Color :string="primary";
   passErrorMessage :string='';
   notLoading$:Observable<boolean>=of(true)
+  error:string="";
+  isWrong:boolean=false
 
 
   constructor(private libService:LibService,private route:Router) { }
@@ -68,11 +70,11 @@ export class SignupComponent implements OnInit {
     let pass2 = (<HTMLInputElement>document.getElementById('pass2')).value;
 
     let ok = true;
-    if (name == ''){ok = false;alert('Name is required')}
-    else if ((this.email.hasError('email')) || (email=='')){ok = false;alert('Invalid E-mail!')}
-    else if (pass1 ==''){ok = false;alert('Password is required')}
-    else if (pass1 != pass2){ok=false;alert('Passwords not matching!')}
-    if(LastName != ''){ name = name+LastName}
+    if (name == ''){ok = false;this.isWrong=true;this.error="Name is required!"}
+    else if ((this.email.hasError('email')) || (email=='')){ok = false;this.isWrong=true;this.error="Invalid Email!"}
+    else if (pass1 ==''){ok = false;this.isWrong=true;this.error="Password is Required!"}
+    else if (pass1 != pass2){ok=false;this.isWrong=true;this.error="Passwords do not match!"}
+    if(LastName != ''){ name = name+' '+LastName}
 
     if(ok == true){
       this.notLoading$=of(false)

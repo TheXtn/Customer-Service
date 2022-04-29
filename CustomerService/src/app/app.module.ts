@@ -29,6 +29,9 @@ import { TicketsComponent } from './components/tickets/tickets.component';
 import { CrtTicketComponent } from './components/crt-ticket/crt-ticket.component';
 import { ReplyComponent } from './components/reply/reply.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { MatOverlayComponent } from './components/mat-overlay/mat-overlay.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 const appRoutes: Routes=[
   {path:'',component: HomeComponent,},
@@ -59,6 +62,7 @@ const appRoutes: Routes=[
     CrtTicketComponent,
     ReplyComponent,
     PageNotFoundComponent,
+    MatOverlayComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,8 +82,10 @@ const appRoutes: Routes=[
     SidebarModule.forRoot(),
     RouterModule.forRoot(appRoutes, {enableTracing: true}),
     MatSidenavModule,
+    MatDialogModule,
   ],
   providers: [HeaderComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[MatOverlayComponent]
 })
 export class AppModule { }
