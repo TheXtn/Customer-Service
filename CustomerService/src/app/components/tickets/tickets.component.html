@@ -45,7 +45,7 @@
                                 <span style="text-align: center;min-width: 200px;"><div><b>Issue</b></div>
                                 <div>{{desc[index]}}</div></span>
                                 <div *ngIf="closed[index]; else elseBlock">
-                                    <button mat-raised-button color="warn" style="height: 38px;"  disabled ><p>Ticket is closed</p></button>
+                                    <button mat-raised-button color="Basic" style="height: 38px;" (click)="reply(ticketIDS[index])"><p>Ticket is closed</p></button>
                                 </div>
                                 <ng-template #elseBlock>
                                     <span><button mat-raised-button color="primary" style="height: 38px;" (click)="reply(ticketIDS[index])" ><p>Reply</p></button>

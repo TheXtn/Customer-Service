@@ -26,6 +26,7 @@ export class ReplyComponent implements OnInit {
   resp$ : Observable<any>;
 
   message:string="";
+  closed:boolean=true;
 
   text1:string="Loading"
   text2:string="Please Wait..."
@@ -68,6 +69,7 @@ export class ReplyComponent implements OnInit {
     console.log(this.discussion)
     var objDiv = (<HTMLInputElement>document.getElementById('chat'));
     objDiv.scrollIntoView({block: "end"});
+    this.closed=this.ticket.closed;
 
   }
 

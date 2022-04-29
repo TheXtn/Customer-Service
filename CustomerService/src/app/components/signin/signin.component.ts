@@ -73,7 +73,7 @@ export class SigninComponent implements OnInit {
               this.notLoading$=of(false)
             const log=await this.libService.logUser(login,pass,csrf)
             console.log(log)
-            if (log==404){
+            if ((log==404)||(log==400)){
               this.isWrong=true
               this.error="Email or password incorrect!";
               this.notLoading$=of(true)
@@ -84,7 +84,7 @@ export class SigninComponent implements OnInit {
           }else if (this.Role =="Technicien") {
             this.notLoading$=of(false)
             const log=await this.libService.logTech(login,pass,csrf)
-            if (log==404){
+            if ((log==404)||(log==400)){
               this.notLoading$=of(true)
               this.isWrong=true
               this.error="Email or password incorrect!";

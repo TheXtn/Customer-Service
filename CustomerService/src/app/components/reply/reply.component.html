@@ -51,11 +51,17 @@
             </div>
             <div class="containerBOX2" style="width: 100%!important ;margin-top: 10px;">
                 <div style="display: flex;justify-content: space-between;"> 
+                    <div *ngIf="closed ; else closedd">
                         <mat-form-field appearance="outline" style="width:99% !important;">
                             <mat-label>Reply</mat-label>
                             <input matInput placeholder="Reply" id='reply' [(ngModel)]="message" >
                         </mat-form-field>
                         <button mat-icon-button isIconButton="true" color="primary" style="height: 6vh;" (click)="HandleReply()"><mat-icon>send</mat-icon></button>
+                    </div>
+                    <ng-template #closedd>
+                        <p>Ticket is closed</p>
+                    </ng-template>
+                    
                 </div>
             </div>
            </div>
