@@ -1,2 +1,2 @@
-# Mini_Projet_Web2022
- CustomerServiceWebapp
+# Customer Service app
+Clients can open tickets and connect with IT Specialist.
